@@ -1,0 +1,120 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --primary: 201 96% 32%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 201 96% 32%;
+    --radius: 0.5rem;
+    
+    /* Default accent color values (blue) */
+    --accent-50: #eff6ff;
+    --accent-100: #dbeafe;
+    --accent-200: #bfdbfe;
+    --accent-300: #93c5fd;
+    --accent-400: #60a5fa;
+    --accent-500: #3b82f6;
+    --accent-600: #2563eb;
+    --accent-700: #1d4ed8;
+    --accent-800: #1e40af;
+    --accent-900: #1e3a8a;
+    
+    /* Semantic accent colors */
+    --accent-primary: #3b82f6;
+    --accent-primary-hover: #2563eb;
+    --accent-primary-active: #1d4ed8;
+    --accent-light: #dbeafe;
+    --accent-light-hover: #bfdbfe;
+    --accent-dark: #1e40af;
+  }
+}
+
+@layer base {
+  body {
+    @apply bg-white text-gray-900;
+  }
+}
+
+/* Custom scrollbar */
+@layer utilities {
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    @apply bg-gray-300 rounded-full;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    @apply bg-gray-400;
+  }
+}
+
+@keyframes slide-up {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-up {
+  animation: slide-up 0.3s ease-out;
+}
+
+/* Ensure grid columns maintain equal width */
+@layer utilities {
+  .grid-cols-2 > * {
+    min-width: 0;
+  }
+  
+  /* Prevent layout shift when content changes */
+  .grid-stable {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  
+  .grid-stable-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  
+  /* Typing indicator animation */
+  @keyframes bounce {
+    0%, 60%, 100% { transform: translateY(0); }
+    30% { transform: translateY(-10px); }
+  }
+  
+  .animate-bounce {
+    animation: bounce 1.4s infinite;
+  }
+  
+  /* Diff styles */
+  .diff-added {
+    @apply text-green-700 dark:text-green-400 bg-green-50 dark:bg-green-900/20 px-1 rounded;
+  }
+  
+  .diff-removed {
+    @apply text-red-700 dark:text-red-400 bg-red-50 dark:bg-red-900/20 px-1 rounded line-through;
+  }
+}
