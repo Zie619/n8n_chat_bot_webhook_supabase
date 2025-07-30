@@ -13,6 +13,7 @@ export const metadata: Metadata = {
 import { Providers } from './providers'
 import ConsoleBanner from './components/ConsoleBanner'
 import Footer from './components/Footer'
+import DemoWarningBanner from './components/DemoWarningBanner'
 
 export default function RootLayout({
   children,
@@ -23,8 +24,11 @@ export default function RootLayout({
     <html lang="en" className="h-full">
       <body className={`${inter.className} h-full`}>
         <Providers>
+          <DemoWarningBanner />
           <ConsoleBanner />
-          {children}
+          <div className="pt-14">
+            {children}
+          </div>
           <Footer />
         </Providers>
       </body>

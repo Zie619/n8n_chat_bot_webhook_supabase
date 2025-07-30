@@ -130,6 +130,17 @@ export async function createUser(email: string, password: string): Promise<User 
 
 export async function authenticateUser(email: string, password: string): Promise<User | null> {
   try {
+    // Demo mode authentication
+    if (email === 'user' && password === 'user') {
+      logger.info('Demo mode authentication');
+      return {
+        id: 'demo-user-1',
+        email: 'demo@example.com',
+        created_at: new Date().toISOString(),
+        last_login: new Date().toISOString(),
+      };
+    }
+    
     if (!supabase) {
       logger.warn('Supabase client not initialized. Using mock authentication.');
       // Return a mock user for development
@@ -173,6 +184,16 @@ export async function authenticateUser(email: string, password: string): Promise
 
 export async function getUserById(userId: string): Promise<User | null> {
   try {
+    // Demo user support
+    if (userId === 'demo-user-1') {
+      return {
+        id: userId,
+        email: 'demo@example.com',
+        created_at: new Date().toISOString(),
+        last_login: new Date().toISOString(),
+      };
+    }
+    
     if (!supabase) {
       logger.warn('Supabase client not initialized. Using mock data.');
       // Return mock user data

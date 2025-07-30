@@ -9,8 +9,8 @@ import { LoadingButton } from '@/components/LoadingButton';
 export default function LoginPage() {
   const router = useRouter();
   const { user, login, register } = useAuth();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('user');
+  const [password, setPassword] = useState('user');
   const [adminPassword, setAdminPassword] = useState('');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -75,6 +75,13 @@ export default function LoginPage() {
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+          {!isRegistering && (
+            <div className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+              <p className="text-sm text-blue-800 font-medium">Demo Credentials:</p>
+              <p className="text-sm text-blue-700 mt-1">Username: user</p>
+              <p className="text-sm text-blue-700">Password: user</p>
+            </div>
+          )}
           <form className="space-y-6" onSubmit={handleSubmit}>
             {error && (
               <div className="bg-red-50 border border-red-200 rounded-lg p-4 flex items-start space-x-2">
