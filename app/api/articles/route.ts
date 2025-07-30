@@ -33,6 +33,99 @@ export const GET = withLogging(async (request: NextRequest) => {
       throw new AuthenticationError('Invalid or expired token');
     }
 
+    // Return demo articles for demo user
+    if (authPayload.userId === 'demo-user-1') {
+      const demoArticles = [
+        {
+          id: 'demo-article-1',
+          user_id: 'demo-user-1',
+          title: 'Welcome to xFunnel - Your AI-Powered Article Editor',
+          content: `# Welcome to xFunnel!
+
+This is a demo article showing the capabilities of our AI-powered article editor.
+
+## Features
+
+### 1. Rich Text Editing
+- **Bold**, *italic*, and ~~strikethrough~~ text
+- Bullet points and numbered lists
+- Code blocks with syntax highlighting
+
+### 2. AI Assistant
+Click the "Ask Claude" button to get AI assistance with:
+- Content suggestions
+- Grammar improvements
+- Research help
+- Creative ideas
+
+### 3. Real-time Saving
+Your articles are automatically saved as you type.
+
+### 4. Export Options
+Send your finished articles to external systems via webhook integration.
+
+## Example Code Block
+
+\`\`\`javascript
+function greetUser(name) {
+  return \`Hello, \${name}! Welcome to xFunnel.\`;
+}
+
+console.log(greetUser('Demo User'));
+\`\`\`
+
+## Try It Out!
+
+Feel free to edit this article or create a new one. In demo mode, changes won't be saved permanently.
+
+---
+
+*This is a demo article created for demonstration purposes.*`,
+          status: 'published',
+          created_at: new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString(),
+          updated_at: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
+          word_count: 150,
+          last_editor: {
+            id: 'demo-user-1',
+            email: 'user@user.com'
+          }
+        },
+        {
+          id: 'demo-article-2',
+          user_id: 'demo-user-1',
+          title: 'Getting Started with AI Writing',
+          content: `# Getting Started with AI Writing
+
+Learn how to leverage AI to enhance your writing process.
+
+## Benefits of AI-Assisted Writing
+
+1. **Speed**: Generate content ideas quickly
+2. **Quality**: Improve grammar and style
+3. **Creativity**: Explore new angles and perspectives
+
+## Best Practices
+
+- Always review AI suggestions
+- Maintain your unique voice
+- Use AI as a tool, not a replacement
+
+Try clicking "Ask Claude" to see AI assistance in action!`,
+          status: 'draft',
+          created_at: new Date(Date.now() - 48 * 60 * 60 * 1000).toISOString(),
+          updated_at: new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString(),
+          word_count: 75,
+          last_editor: {
+            id: 'demo-user-1',
+            email: 'user@user.com'
+          }
+        }
+      ];
+      
+      logger.info('Returning demo articles for demo user');
+      return NextResponse.json(demoArticles);
+    }
+
     // Extract and validate query parameters
     const searchParams = request.nextUrl.searchParams;
     const limit = parseInt(searchParams.get('limit') || '50');

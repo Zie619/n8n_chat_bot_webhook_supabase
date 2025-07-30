@@ -48,6 +48,58 @@ export default function ChatInterfaceV2({
   // Load chat history from localStorage
   useEffect(() => {
     if (typeof window !== 'undefined' && articleId) {
+      // Demo chat history for demo articles
+      if (articleId === 'demo-article-1') {
+        const demoMessages: Message[] = [
+          {
+            id: 'demo-msg-1',
+            role: 'user',
+            content: 'Can you help me improve the introduction?',
+            timestamp: new Date(Date.now() - 60 * 60 * 1000),
+            editStatus: 'approved'
+          },
+          {
+            id: 'demo-msg-2',
+            role: 'assistant',
+            content: 'I\'d be happy to help improve the introduction! The current introduction is clear and welcoming. Here\'s a suggestion to make it even more engaging:\n\n"Welcome to xFunnel, where AI meets creativity! This demo showcases our powerful article editor that transforms your writing process with intelligent assistance."\n\nThis version adds more energy and immediately highlights the AI-powered nature of the platform.',
+            timestamp: new Date(Date.now() - 59 * 60 * 1000),
+            editStatus: 'approved'
+          },
+          {
+            id: 'demo-msg-3',
+            role: 'user',
+            content: 'Great! Can you also suggest a better structure for the features section?',
+            timestamp: new Date(Date.now() - 30 * 60 * 1000)
+          },
+          {
+            id: 'demo-msg-4',
+            role: 'assistant',
+            content: 'Absolutely! Here\'s a more structured approach for your features section:\n\n## Core Features\n\n### ✍️ Smart Editing\n- Real-time markdown preview\n- Auto-save functionality\n- Rich formatting options\n\n### 🤖 AI Integration\n- Claude-powered writing assistance\n- Grammar and style suggestions\n- Content generation and expansion\n\n### 🚀 Workflow Tools\n- One-click article duplication\n- Webhook integration for publishing\n- Export to multiple formats\n\nThis structure uses icons for visual appeal and groups related features together for better readability.',
+            timestamp: new Date(Date.now() - 29 * 60 * 1000)
+          }
+        ];
+        setMessages(demoMessages);
+        return;
+      } else if (articleId === 'demo-article-2') {
+        const demoMessages: Message[] = [
+          {
+            id: 'demo-msg-5',
+            role: 'user',
+            content: 'What are some advanced AI writing techniques I should know about?',
+            timestamp: new Date(Date.now() - 2 * 60 * 60 * 1000)
+          },
+          {
+            id: 'demo-msg-6',
+            role: 'assistant',
+            content: 'Here are some advanced AI writing techniques to enhance your content:\n\n1. **Prompt Engineering**: Craft specific, detailed prompts to get better AI responses\n2. **Iterative Refinement**: Use AI suggestions as a starting point, then refine\n3. **Style Mirroring**: Ask AI to match the tone of existing content\n4. **Fact-Checking Loop**: Always verify AI-generated facts and statistics\n5. **Creative Brainstorming**: Use AI for ideation, not just writing\n\nRemember: AI is a powerful tool, but your human creativity and judgment are irreplaceable!',
+            timestamp: new Date(Date.now() - 2 * 60 * 60 * 1000 + 30000)
+          }
+        ];
+        setMessages(demoMessages);
+        return;
+      }
+      
+      // Regular chat history loading
       const saved = localStorage.getItem(`chat-history-v2-${articleId}`);
       if (saved) {
         const parsed = JSON.parse(saved);
@@ -61,7 +113,8 @@ export default function ChatInterfaceV2({
 
   // Save chat history
   useEffect(() => {
-    if (messages.length > 0 && articleId) {
+    // Don't save chat history for demo articles
+    if (messages.length > 0 && articleId && !articleId.startsWith('demo-')) {
       localStorage.setItem(`chat-history-v2-${articleId}`, JSON.stringify(messages));
     }
   }, [messages, articleId]);
