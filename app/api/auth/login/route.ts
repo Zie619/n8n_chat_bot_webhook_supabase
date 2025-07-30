@@ -45,8 +45,7 @@ export const POST = withLogging(async (request: NextRequest) => {
       throw new ValidationError('Email and password are required');
     }
 
-    // Allow demo user without @ validation
-    if (email !== 'user' && !email.includes('@')) {
+    if (!email.includes('@')) {
       throw new ValidationError('Invalid email format');
     }
 

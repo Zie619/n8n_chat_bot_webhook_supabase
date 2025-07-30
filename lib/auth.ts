@@ -131,11 +131,11 @@ export async function createUser(email: string, password: string): Promise<User 
 export async function authenticateUser(email: string, password: string): Promise<User | null> {
   try {
     // Demo mode authentication
-    if (email === 'user' && password === 'user') {
+    if (email === 'user@user.com' && password === 'user') {
       logger.info('Demo mode authentication');
       return {
         id: 'demo-user-1',
-        email: 'demo@example.com',
+        email: 'user@user.com',
         created_at: new Date().toISOString(),
         last_login: new Date().toISOString(),
       };
@@ -188,7 +188,7 @@ export async function getUserById(userId: string): Promise<User | null> {
     if (userId === 'demo-user-1') {
       return {
         id: userId,
-        email: 'demo@example.com',
+        email: 'user@user.com',
         created_at: new Date().toISOString(),
         last_login: new Date().toISOString(),
       };

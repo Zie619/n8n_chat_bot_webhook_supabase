@@ -9,7 +9,7 @@ import { LoadingButton } from '@/components/LoadingButton';
 export default function LoginPage() {
   const router = useRouter();
   const { user, login, register } = useAuth();
-  const [email, setEmail] = useState('user');
+  const [email, setEmail] = useState('user@user.com');
   const [password, setPassword] = useState('user');
   const [adminPassword, setAdminPassword] = useState('');
   const [error, setError] = useState('');
@@ -78,7 +78,7 @@ export default function LoginPage() {
           {!isRegistering && (
             <div className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
               <p className="text-sm text-blue-800 font-medium">Demo Credentials:</p>
-              <p className="text-sm text-blue-700 mt-1">Username: user</p>
+              <p className="text-sm text-blue-700 mt-1">Email: user@user.com</p>
               <p className="text-sm text-blue-700">Password: user</p>
             </div>
           )}
